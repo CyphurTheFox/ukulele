@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component
 @Component
 class PauseCommand : Command ("pause") {
     override suspend fun CommandContext.invoke() {
+        if (!isPermissible()) return
+
         if (player.isPaused) return reply("Player already paused. Use `resume` to continue playback.")
 
         player.pause()

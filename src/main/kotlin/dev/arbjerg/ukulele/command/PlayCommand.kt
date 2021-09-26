@@ -33,7 +33,12 @@ class PlayCommand(
             return false
         }
 
-        if (ourVc != theirVc && theirVc != null)  {
+        if (ourVc != theirVc && ourVc != null) { //my check to make sure people can't dick around w/ someone else's music
+            reply("The bot is already in a Voice Channel. You need to be in the same voice channel as the bot to use commands")
+            return false
+        }
+
+        if (ourVc != theirVc && theirVc != null) {
             val canTalk = selfMember.hasPermission(Permission.VOICE_CONNECT, Permission.VOICE_SPEAK)
             if (!canTalk) {
                 reply("I need permission to connect and speak in ${theirVc.name}")

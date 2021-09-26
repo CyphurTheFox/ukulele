@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class ResumeCommand : Command ("resume") {
     override suspend fun CommandContext.invoke() {
+        if (!isPermissible()) return
         if (!player.isPaused) return reply("Player is already playing.")
 
         player.resume()
