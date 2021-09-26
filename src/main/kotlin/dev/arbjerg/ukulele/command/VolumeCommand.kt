@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class VolumeCommand(val players: PlayerRegistry) : Command("volume", "v") {
     override suspend fun CommandContext.invoke() {
+        if (!isPermissible()) return
         if (argumentText.isBlank()) return reply("The volume is set to ${player.volume}%.")
 
         val num = argumentText.removeSuffix("%")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 class StopCommand : Command("stop") {
     override suspend fun CommandContext.invoke() {
         val skipped = player.tracks.size
+        if (!isPermissible()) return
 
         player.stop()
         guild.audioManager.closeAudioConnection()

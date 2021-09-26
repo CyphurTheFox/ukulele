@@ -11,4 +11,5 @@ class BotProps(
         var game: String = "",
         var trackDurationLimit: Int = 0,
         var announceTracks: Boolean = false
+        var timeout: Long = 300000
 )

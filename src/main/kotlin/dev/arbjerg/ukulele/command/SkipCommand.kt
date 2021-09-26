@@ -1,7 +1,6 @@
 package dev.arbjerg.ukulele.command
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
-import dev.arbjerg.ukulele.audio.PlayerRegistry
 import dev.arbjerg.ukulele.features.HelpContext
 import dev.arbjerg.ukulele.jda.Command
 import dev.arbjerg.ukulele.jda.CommandContext
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class SkipCommand : Command("skip", "s") {
     override suspend fun CommandContext.invoke() {
+        if (!isPermissible()) return
         when {
             argumentText.isBlank() -> skipNext()
             argumentText.toIntOrNull() != null -> skipIndex(argumentText.toInt())
