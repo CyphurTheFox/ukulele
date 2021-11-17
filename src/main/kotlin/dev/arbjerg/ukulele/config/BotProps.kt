@@ -9,5 +9,7 @@ class BotProps(
         var prefix: String = "::",
         var database: String = "./database",
         var game: String = "",
-        var timeout: Long = 300000
+        var timeout: Long = 300000,
+        var DJRoleName: String = "DJ",
+        var maintainerID: Long = 0
 )

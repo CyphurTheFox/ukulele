@@ -80,14 +80,19 @@ class CommandContext(
             return true
         }
 
+        if(invoker.idLong == beans.botProps.maintainerID){
+            //maintainer?
+            return true
+        }
+
         for (role in invoker.roles) {
             //DJ role?
-            if (role.name.equals("Fox DJ")) {
+            if (role.name.equals(beans.botProps.DJRoleName)) {
                 return true
             }
         }
 
-        reply("This command requires you to either have a role named `Fox DJ` or the `Manage Channels` permission to use it (being alone with the bot also works)")
+        reply("This command requires you to either have a role named `${beans.botProps.DJRoleName}` or the `Manage Channels` permission to use it (being alone with the bot also works)")
         return false
     }
 }

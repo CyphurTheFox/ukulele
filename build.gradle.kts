@@ -58,3 +58,10 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "11"
     }
 }
+
+tasks.register("Deploy"){
+    dependsOn("build")
+    doLast{
+        Runtime.getRuntime().exec("konsole --hold -e gcloud compute scp ./build/libs/ukulele.jar traffic-bouncer:~/JamminFox/jar")
+    }
+}

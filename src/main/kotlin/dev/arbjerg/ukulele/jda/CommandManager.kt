@@ -37,6 +37,8 @@ class CommandManager(
 
     operator fun get(commandName: String) = registry[commandName]
 
+    fun getAll() = registry
+
     fun onMessage(guild: Guild, channel: TextChannel, member: Member, message: Message) {
         GlobalScope.launch {
             // TODO: Allow mentions

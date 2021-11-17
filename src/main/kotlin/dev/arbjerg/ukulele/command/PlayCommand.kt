@@ -21,6 +21,10 @@ class PlayCommand(
     override suspend fun CommandContext.invoke() {
         if (!ensureVoiceChannel()) return
         val identifier = argumentText
+        if(identifier == "" && player.isPaused && isPermissible()){
+            player.resume()
+            return
+        }
         apm.loadItem(identifier, Loader(this, player, identifier))
     }
 

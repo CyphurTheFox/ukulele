@@ -101,6 +101,14 @@ class Player(val beans: Beans, guildProperties: GuildProperties) : AudioEventAda
         player.stopTrack()
     }
 
+    fun voteSkip() {
+
+    }
+
+    fun shuffle() {
+        queue.shuffle()
+    }
+
     override fun onTrackEnd(player: AudioPlayer, track: AudioTrack, endReason: AudioTrackEndReason) {
         val new = queue.take() ?: return
         player.playTrack(new)

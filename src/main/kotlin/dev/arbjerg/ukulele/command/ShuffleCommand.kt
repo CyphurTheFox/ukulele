@@ -6,17 +6,15 @@ import dev.arbjerg.ukulele.jda.CommandContext
 import org.springframework.stereotype.Component
 
 @Component
-class ResumeCommand : Command ("resume") {
+class ShuffleCommand : Command("shuffle") {
     override suspend fun CommandContext.invoke() {
         if (!isPermissible()) return
-        if (!player.isPaused) return reply("Player is already playing.")
-
-        player.resume()
-        reply("Playback has been resumed.")
+        player.shuffle()
+        reply("Queue Shuffled!")
     }
 
     override fun HelpContext.provideHelp() {
         addUsage("")
-        addDescription("Resumes the playback.")
+        addDescription("Shuffles the queue")
     }
 }
