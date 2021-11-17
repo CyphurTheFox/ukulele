@@ -1,7 +1,6 @@
 package dev.arbjerg.ukulele.audio
 
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack
-import java.util.*
 
 class TrackQueue {
 
@@ -9,10 +8,7 @@ class TrackQueue {
     val tracks: List<AudioTrack> get() = queue
     val duration: Long get() = queue.filterNot { it.info.isStream }.sumOf { it.info.length } // Streams don't have a valid time.
 
-    fun add(vararg tracks: AudioTrack) {
-        queue.addAll(tracks)
-    }
-
+    fun add(vararg tracks: AudioTrack) { queue.addAll(tracks) }
     fun take() = queue.removeFirstOrNull()
     fun peek() = queue.firstOrNull()
     fun clear() = queue.clear()
@@ -24,6 +20,6 @@ class TrackQueue {
     }
 
     fun shuffle() {
-        Collections.shuffle(queue)
+        queue.shuffle()
     }
 }
