@@ -128,6 +128,13 @@ class Player(val beans: Beans, guildProperties: GuildProperties) : AudioEventAda
             lastChannel?.sendMessage(beans.nowPlayingCommand.buildEmbed(track))?.queue()
         }
     }
+    fun voteSkip() {
+
+    }
+
+    fun shuffle() {
+        queue.shuffle()
+    }
 
     override fun onTrackEnd(player: AudioPlayer, track: AudioTrack, endReason: AudioTrackEndReason) {
         if (isRepeating && endReason.mayStartNext) {

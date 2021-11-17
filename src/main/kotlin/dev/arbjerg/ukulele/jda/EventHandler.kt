@@ -67,8 +67,8 @@ class EventHandler(val beans: Beans, private val commandManager: CommandManager)
     }
 
     private fun isAlone(guild: Guild): Boolean {
-        var self = guild.selfMember
-        var channel = self.voiceState?.channel
+        val self = guild.selfMember
+        val channel = self.voiceState?.channel
 
         if (channel == null) {
             return false

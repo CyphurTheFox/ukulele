@@ -22,13 +22,19 @@ class PlayCommand(
 ) : Command("play", "p") {
     override suspend fun CommandContext.invoke() {
         if (!ensureVoiceChannel()) return
-
         var identifier = argumentText
+
+        if(identifier == "" && player.isPaused && isPermissible()){
+            player.resume()
+            return
+        }
+
         if (!checkValidUrl(identifier)) {
             identifier = "ytsearch:$identifier"
         }
 
         players.get(guild, guildProperties).lastChannel = channel
+        
         apm.loadItem(identifier, Loader(this, player, identifier))
     }
 

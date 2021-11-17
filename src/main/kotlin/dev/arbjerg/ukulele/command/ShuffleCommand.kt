@@ -8,12 +8,13 @@ import org.springframework.stereotype.Component
 @Component
 class ShuffleCommand : Command("shuffle") {
     override suspend fun CommandContext.invoke() {
+        if (!isPermissible()) return
         player.shuffle()
-        reply("This list has been shuffled.")
+        reply("Queue Shuffled!")
     }
 
     override fun HelpContext.provideHelp() {
         addUsage("")
-        addDescription("Shuffles the remaining tracks in the list.")
+        addDescription("Shuffles the remaining tracks in the queue.")
     }
 }
