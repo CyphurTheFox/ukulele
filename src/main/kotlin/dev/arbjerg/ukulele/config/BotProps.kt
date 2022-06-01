@@ -10,8 +10,8 @@ class BotProps(
         var database: String = "./database",
         var game: String = "",
         var trackDurationLimit: Int = 0,
-        var announceTracks: Boolean = false
-        var timeout: Long = 300000
+        var announceTracks: Boolean = false,
+        var timeout: Long = 300000,
         var DJRoleName: String = "DJ",
         var maintainerID: Long = 0
 )

@@ -135,10 +135,6 @@ class Player(val beans: Beans, guildProperties: GuildProperties) : AudioEventAda
 
     }
 
-    fun shuffle() {
-        queue.shuffle()
-    }
-
     override fun onTrackEnd(player: AudioPlayer, track: AudioTrack, endReason: AudioTrackEndReason) {
         if (isRepeating && endReason.mayStartNext) {
             queue.add(track.makeClone())
