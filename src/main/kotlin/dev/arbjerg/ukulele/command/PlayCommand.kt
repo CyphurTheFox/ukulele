@@ -22,11 +22,20 @@ class PlayCommand(
 ) : Command("play", "p") {
     override suspend fun CommandContext.invoke() {
         if (!ensureVoiceChannel()) return
-        val identifier = argumentText
+
+        var identifier = argumentText
+
         if(identifier == "" && player.isPaused && isPermissible()){
             player.resume()
             return
         }
+
+        if (!checkValidUrl(identifier)) {
+            identifier = "ytsearch:$identifier"
+        }
+
+        players.get(guild, guildProperties).lastChannel = channel
+        
         apm.loadItem(identifier, Loader(this, player, identifier))
     }
 
@@ -59,6 +68,11 @@ class PlayCommand(
         return ourVc != null
     }
 
+    fun checkValidUrl(url: String): Boolean {
+        return url.startsWith("http://")
+                || url.startsWith("https://")
+    }
+
     inner class Loader(
             private val ctx: CommandContext,
             private val player: Player,
@@ -82,6 +96,11 @@ class PlayCommand(
             val filteredCount = playlist.tracks.size - accepted.size
             if (accepted.isEmpty()) {
                 ctx.reply("Refusing to play $filteredCount tracks because because they are all over ${botProps.trackDurationLimit} minutes long")
+                return
+            }
+
+            if (identifier.startsWith("ytsearch") || identifier.startsWith("ytmsearch") || identifier.startsWith("scsearch:")) {
+                this.trackLoaded(accepted.component1());
                 return
             }
 

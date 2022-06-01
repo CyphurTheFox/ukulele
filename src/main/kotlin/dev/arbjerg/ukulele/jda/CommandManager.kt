@@ -43,6 +43,8 @@ class CommandManager(
     fun getCommands() = registry.values.distinct()
 >>>>>>> freyacodes-master/master
 
+    fun getAll() = registry
+
     fun onMessage(guild: Guild, channel: TextChannel, member: Member, message: Message) {
         GlobalScope.launch {
             val guildProperties = guildProperties.getAwait(guild.idLong)

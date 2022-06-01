@@ -9,7 +9,9 @@ class BotProps(
         var prefix: String = "::",
         var database: String = "./database",
         var game: String = "",
-        var timeout: Long = 300000,
+        var trackDurationLimit: Int = 0,
+        var announceTracks: Boolean = false
+        var timeout: Long = 300000
         var DJRoleName: String = "DJ",
         var maintainerID: Long = 0
 )
